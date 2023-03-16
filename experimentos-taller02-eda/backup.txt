@@ -1,0 +1,151 @@
+//Autor: Daniela Torres Gómez
+//Fecha: 21 de febrero 2023
+//Problema: JaveMusic es un programa que permite al usuario manejar y acceder a la música que tiene almacenada, además que le permite adicionar, eliminar y editar las canciones que éste tiene guardadas. Adicionalmente, le permite al usuario realizar búsquedas de sus canciones de múltiples formas, bien sea por su título, artista, género o por el álbum al que está asociada. Finalmente, el sistema permite registrar información adicional para las canciones, como su duración y la clasificación que el usuario le asigna.
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <stdlib.h>
+#include <sstream> //funcion split de string
+
+using namespace std;
+
+
+struct JaveMusic{
+ int numCanciones[300];
+ string nombreCancion;
+ string autor;
+ string genero;
+ string nombreAlbum;
+ int year;
+};
+
+void escribir();
+void obtener_canciones(string *lista_canciones, int *num_canciones); //funcion de tipo int para que retorne el numero de canciones
+void separar_informacion(string *lista_canciones, int *num_canciones);
+
+int main () {
+string *lista_canciones;
+int *num_canciones;
+obtener_canciones(lista_canciones, num_canciones);
+  cout<<num_canciones<<"  "<<num_canciones<<"  "<<num_canciones<<endl; //revisar como sacar bien el num_canciones, probablemente sea el problema 
+  for(int i=0;i<*num_canciones;i++)
+    cout<<lista_canciones;
+ //   cout<<"prueba2"<<endl;
+separar_informacion(lista_canciones,num_canciones);
+//Lamado de la función "escribir"
+// escribir();
+//Creación del menú de opciones para el usuario 
+/*
+  int opcion;
+    bool repetir = true;
+    
+    do {
+        system("cls");
+        
+        // Texto del menú que se verá cada vez
+        cout << "\n\nMenu de Opciones" << endl;
+        cout << "1. Listar todos los autores presentes, ordenados alfabéticamente" << endl;
+        cout << "2. Dado un autor, listar todas sus canciones alfabéticamente" << endl;
+        cout << "3. Listar todos los álbumes presentes, ordenados cronológicamente " << endl;
+        cout << "4. Dado un álbum, listar todas las canciones ordenadas alfabéticamente" << endl;
+        cout << "5. Listar todas las canciones y su álbum, ordenadas alfabéticamente primero por el álbum y después por el nombre de la canción" << endl;
+        cout << "0. SALIR" << endl;
+        
+        cout << "\nIngrese una opción: ";
+        cin >> opcion;
+        
+        switch (opcion) {
+            case 1:
+                // Lista de instrucciones de la opción 1               
+                system("pause>nul"); // Pausa
+                break;
+                
+            case 2:
+                // Lista de instrucciones de la opción 2                              
+                system("pause>nul"); // Pausa
+                break;
+                
+            case 3:
+                // Lista de instrucciones de la opción 3                
+                system("pause>nul"); // Pausa            
+                break;
+                
+            case 4:
+                // Lista de instrucciones de la opción 4                
+                system("pause>nul"); // Pausa                
+                break;
+            
+            case 0:
+            	repetir = false;
+            	break;
+        }        
+    } while (repetir);
+	 
+    return 0;
+
+
+
+  */
+
+delete [] lista_canciones;
+  return 0; 
+}
+
+void escribir(){
+  ofstream fichero;
+
+  fichero.open("canciones.txt",ios::out);
+  if(fichero.fail()){
+    cout<<"No se pudo abrir el archivo";
+    
+  }
+  fichero<<"";
+}
+/* PARA EVITAR PERDERLA MIENTRAS LA MODIFICO EN EL CODIGO
+  std::string line;
+std::ifstream fichero ("example1P.txt"); 
+  if (fichero.is_open()) {
+    while ( getline (fichero,line) ) {
+      std::cout << line << "\n";
+}
+fichero.close(); }
+else std::cout <<"Unable to open file";
+*/
+
+void obtener_canciones(string *lista_canciones, int *num_canciones){
+  string line, Ncanciones;
+  int aux, aux2;
+  aux2=0;
+ifstream fichero ("example1.txt"); 
+  if (fichero.is_open()) {
+    getline(fichero,Ncanciones);
+    aux= stoi(Ncanciones);
+    lista_canciones = new string[aux];
+     while ( getline (fichero,line) ) {
+      cout << line << "\n";
+      lista_canciones[aux2]=line;
+       aux2=aux2+1;
+} // cout<<"fin while"<<endl; //para debugeo manual
+   /* for(int i=0;i<aux;i++)
+      cout<<lista_canciones[i]<<endl; */ // mas debugeo
+fichero.close(); }
+else cout <<"Unable to open file";
+  cout<<"esta puta mierda"<<aux<<endl;
+ *num_canciones=aux;
+  cout<<aux<<"  "<<num_canciones<<"  "<<*num_canciones<<endl;
+};
+
+void separar_informacion(string *lista_canciones, int *num_canciones){
+string line, line_aux;
+  // cout<<"prueba2"<<endl;
+   cout<<*lista_canciones<<endl;
+  for(int i=0;i<*num_canciones;i++){
+    cout<<*lista_canciones<<endl;
+    stringstream info_cancion(lista_canciones[i]);                    // Convertir la cadena a un stream
+    while( getline( info_cancion, line,'|')){
+      cout<<line<<"  ";}
+    cout<<"siguiente cancion"<<endl;
+    }
+
+};
